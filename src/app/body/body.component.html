@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col s12 m12">
+      <h4 class="center">Input List</h4>
+      <form class="col s11 m11">
+        <div class="row">Informe a tarefa
+          <textarea placeholder="Informar a Tarefa" #todo class="materialize-textarea">Informe a Tarefa</textarea>
+          <label for="textarea1">{{tarefaSelect?.todo}}</label>
+          <div class="col">
+          </div>
+        </div>
+      </form>
+      <button class="btn blue" (click)="addtoDo(todo.value)">Input</button>      
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s6 m6">
+      <label>
+          <form action="#" class="">          
+              <label>Pesquise por Status:
+                  <input [(ngModel)]="filterargs.status" placeholder="" style="text-transform: lowercase;" [ngModelOptions]="{standalone: true}">
+              </label>
+        </form>
+      </label>
+    </div>
+    <div class="col s6 m6 center">
+      <button class="btn btn-large  red" (click)="removetoDofinish()">Deletar Finalizados</button>
+      <button class="btn btn-large  red" (click)="removeAll()">Deletar Todos</button>    
+    </div>
+     
+  </div>
+  <div class="row">
+    <div class="col s6 m6">
+      <table>
+        <tr *ngFor="let tarefaSelect of Tarefas | filter:filterargs ; let selelist of to_do" style="margin-bottom: 10px;" [class.selected]="selelist === selectedList"
+          (click)="onSelect(selelist)">
+          <td >{{tarefaSelect.todo}}</td><td style="font-size: 10px; text-align:left; color:brown">{{tarefaSelect.status}}</td>
+          <td><button (click)="removetoDo(tarefaSelect)" class="btn btn-small red right">Delete</button></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col s6 m6">
+      <div *ngIf="selectedList">
+        <h2 class="center">Atualize o status</h2>
+        <label>name:
+          <input [(ngModel)]="selectedList.todo" placeholder="">
+        </label>
+        <label>
+          <form action="#" class="center">
+            <p>
+              <label>Qual o status? (Pendencia/Em andamento/Finalizado/Analise)                
+                <input name="status" [(ngModel)]="selectedList.status" style="text-transform: lowercase;" />
+                <span></span>
+              </label>
+            </p>
+          </form>
+        </label>
+      </div>
+    </div>
+  </div>  
+</div>
